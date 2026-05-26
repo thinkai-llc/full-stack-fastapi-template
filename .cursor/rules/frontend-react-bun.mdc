@@ -1,0 +1,15 @@
+---
+description: React frontend with Bun, Vite, TanStack Router, and generated API client
+globs: frontend/**/*
+alwaysApply: false
+---
+
+# Frontend (React + Bun)
+
+- Package manager: **Bun** (`bun install`, `bun run dev`). Root `package.json` workspaces delegate to `frontend/`.
+- Routes: TanStack Router in `frontend/src/routes/`; run dev server to regenerate `routeTree.gen.ts` — do not hand-edit it.
+- UI: Tailwind + shadcn/ui components under `frontend/src/components/ui/`.
+- API client is **generated** from OpenAPI (`frontend/src/client/`). Regenerate via repo-root `./scripts/generate-client.sh` after backend API changes.
+- Lint/format: Biome — `bun run lint` in `frontend/`.
+- E2E tests: Playwright in `frontend/tests/`; config in `playwright.config.ts`. Auth setup in `tests/auth.setup.ts`.
+- Use existing hooks (`useAuth`, `useCustomToast`, etc.) and TanStack Query patterns already in the codebase.

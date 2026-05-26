@@ -1,0 +1,17 @@
+---
+description: Docker Compose stack layout and local development commands
+globs: compose*.yml
+alwaysApply: false
+---
+
+# Docker Compose
+
+- `compose.yml` — base stack (db, backend, frontend, prestart, traefik labels).
+- `compose.override.yml` — dev overrides (volume mounts, local Traefik); applied automatically with `compose.yml`.
+- `compose.traefik.yml` — production Traefik; not used for simple local dev.
+- Configuration flows from `.env`; restart after env changes: `docker compose watch`.
+- Services: backend `:8000`, frontend `:5173`, Adminer `:8080`, Mailcatcher `:1080`.
+- Run backend prestart/migrations via the `prestart` service; backend image built from `backend/Dockerfile`.
+- Logs: `docker compose logs [service]`; stop a service to run it locally on the same port (see `development.md`).
+
+Do not commit production secrets in Compose files; use `.env` and documented env vars.
