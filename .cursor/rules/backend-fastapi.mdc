@@ -1,0 +1,16 @@
+---
+description: Python FastAPI backend conventions (SQLModel, routes, migrations)
+globs: backend/**/*
+alwaysApply: false
+---
+
+# Backend (FastAPI + SQLModel)
+
+- App entry: `backend/app/main.py`; routers under `backend/app/api/routes/`, mounted in `app/api/main.py`.
+- Use dependency types from `app/api/deps.py` (`SessionDep`, `CurrentUser`, etc.) instead of ad-hoc DB/session wiring.
+- Models and Pydantic schemas live in `app/models.py`; persistence helpers in `app/crud.py`.
+- Settings via `app/core/config.py` (`pydantic-settings`); never hardcode secrets.
+- DB migrations: Alembic in `app/alembic/` — add revisions for schema changes; do not edit applied migration files.
+- Lint/typecheck: Ruff + mypy (strict); run from `backend/` with `uv run ruff check app` / `uv run mypy app`.
+- Tests mirror app layout under `backend/tests/`; use fixtures in `tests/conftest.py` and helpers in `tests/utils/`.
+- Raise `HTTPException` for API errors; use SQLModel `select()` / `session.exec()` patterns consistent with existing routes.

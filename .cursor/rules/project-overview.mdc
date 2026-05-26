@@ -1,0 +1,27 @@
+---
+description: Full-stack template overview, safe AI conventions, and test entrypoints
+alwaysApply: true
+---
+
+# Project overview
+
+Full-stack FastAPI template: Python API in `backend/`, React + Vite frontend in `frontend/`, orchestrated with Docker Compose. See `development.md` for local workflows.
+
+## Safe conventions for AI-assisted work
+
+- Never commit secrets: `.env`, generated keys, or credentials.
+- Prefer minimal, focused diffs; do not remove unrelated code.
+- After backend API/schema changes, regenerate the frontend client: `./scripts/generate-client.sh` (do not hand-edit `frontend/src/client/*`).
+- Run linters via `uv run prek run --all-files` from repo root (or rely on pre-commit hooks).
+
+## Test entrypoints
+
+| Scope | Command |
+|-------|---------|
+| Full stack (CI-style) | `./scripts/test.sh` — builds Compose, runs backend pytest in container |
+| Backend only (in Compose) | `docker compose exec backend bash scripts/tests-start.sh` |
+| Backend pytest (local, in `backend/`) | `bash scripts/test.sh` (coverage + pytest on `tests/`) |
+| Frontend E2E | `bun run test` (root) or `cd frontend && bun run test` |
+| Frontend E2E UI mode | `bun run test:ui` |
+
+Local dev: `docker compose watch`; backend alone: `cd backend && fastapi dev app/main.py`; frontend alone: `bun run dev`.
