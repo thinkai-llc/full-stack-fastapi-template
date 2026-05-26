@@ -1,0 +1,15 @@
+# Secrets and local env
+.env*
+
+# Python virtual environments
+**/.venv
+
+# JavaScript dependencies
+node_modules/
+
+# Test coverage HTML reports
+htmlcov/
+**/htmlcov/
+
+# Generated OpenAPI TypeScript client
+frontend/src/client/
