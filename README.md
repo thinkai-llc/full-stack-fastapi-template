@@ -222,6 +222,8 @@ Deployment docs: [deployment.md](./deployment.md).
 
 General development docs: [development.md](./development.md).
 
+Agent / CI-parity commands: [AGENTS.md](./AGENTS.md) (non-interactive build and test).
+
 This includes using Docker Compose, custom local domains, `.env` configurations, etc.
 
 ## Release Notes
